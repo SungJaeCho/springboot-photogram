@@ -8,7 +8,7 @@
 - Sring Boot DevTools
 - Lombok
 - Spring Data JPA
-- MariaDB Driver
+- MySQL Driver
 - Spring Security
 - Spring Web
 - oauth2-client
@@ -60,8 +60,8 @@ spring:
       suffix: .jsp
       
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/costa?serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/photogram?serverTimezone=Asia/Seoul
     username: costa
     password: costa1234
     
@@ -84,7 +84,8 @@ spring:
       password: 1234   
 
 file:
-  path: C:/src/springbootwork-sts/upload/
+  path: C:/src/springbootwork-sts/upload/ //windows
+  path: /Users/sungjaecho/IdeaProjects/EaszUp-Springboot-Photogram-Start/upload //mac
 ```
 
 ### 태그라이브러리

@@ -1,5 +1,6 @@
 package com.cos.photogramstart.web;
 
+import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.web.dto.auth.SignupDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,9 @@ public class AuthController {
     @PostMapping("/auth/signup")
     public String signup(SignupDto signupDto){
         log.info(signupDto.toString());
+        // User <- SignupDto
+        User user = signupDto.toEntity();
+        log.info(user.toString());
         return "auth/signin";
     }
 }

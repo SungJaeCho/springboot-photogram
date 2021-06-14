@@ -8,9 +8,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller // 1.Ioc 2.파일을 리턴하는 컨트롤러
@@ -33,12 +39,22 @@ public class AuthController {
 
     // 회원가입버튼 -> /auth/signup -> /auth/signin
     @PostMapping("/auth/signup")
-    public String signup(SignupDto signupDto){
-        log.info(signupDto.toString());
-        // User <- SignupDto
-        User user = signupDto.toEntity();
-        User userEntity = authService.회원가입(user);
-        System.out.println(userEntity);
-        return "auth/signin";
+    public @ResponseBody
+    String signup(@Valid SignupDto signupDto, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            Map<String, String> errorMap = new HashMap<>();
+            for(FieldError error : bindingResult.getFieldErrors()){
+                errorMap.put(error.getField(), error.getDefaultMessage());
+            }
+            return "오류남";
+        } else {
+//        log.info(signupDto.toString());
+            // User <- SignupDto
+            User user = signupDto.toEntity();
+            User userEntity = authService.회원가입(user);
+            System.out.println(userEntity);
+            return "auth/signin";
+        }
     }
 }

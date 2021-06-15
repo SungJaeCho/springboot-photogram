@@ -1,6 +1,7 @@
 package com.cos.photogramstart.web;
 
 import com.cos.photogramstart.domain.user.User;
+import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.service.AuthService;
 import com.cos.photogramstart.web.dto.auth.SignupDto;
 import lombok.RequiredArgsConstructor;
@@ -39,15 +40,14 @@ public class AuthController {
 
     // 회원가입버튼 -> /auth/signup -> /auth/signin
     @PostMapping("/auth/signup")
-    public @ResponseBody
-    String signup(@Valid SignupDto signupDto, BindingResult bindingResult){
+    public String signup(@Valid SignupDto signupDto, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             Map<String, String> errorMap = new HashMap<>();
             for(FieldError error : bindingResult.getFieldErrors()){
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }
-            return "오류남";
+            throw new CustomValidationException("유효성검사실패함", errorMap);
         } else {
 //        log.info(signupDto.toString());
             // User <- SignupDto

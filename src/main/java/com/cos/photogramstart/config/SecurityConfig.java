@@ -22,12 +22,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        super.configure(http); super삭제시 기본 security기능 비활성화
         http.csrf().disable(); //csrf토큰 비활성화
         http.authorizeRequests()
-        .antMatchers("/", "/user/**", "/image/**", "/subscribe/**", "/comment/**").authenticated() //이주소는 인증필요
-        .anyRequest().permitAll()
-        .and()
-        .formLogin()
-        .loginPage("/auth/signin")
-        .defaultSuccessUrl("/")
+                .antMatchers("/", "/user/**", "/image/**", "/subscribe/**", "/comment/**").authenticated() //이주소는 인증필요
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/auth/signin") // GET
+                .loginProcessingUrl("/auth/signin") // POST -> 스프링 시큐리티가 로그인 프로세스 진행
+                .defaultSuccessUrl("/")
         ;
     }
 }

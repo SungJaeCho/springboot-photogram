@@ -16,14 +16,14 @@ public class PrincipalDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     // 1. 패스워드는 알아서 체크하니 신경쓸필요없음.
-    // 2. 리턴이 잘되면 자동으로 세션을 만들어줌
+    // 2. 리턴이 잘되면 자동으로 userDetails 세션을 만들어줌
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User userEntity = userRepository.findByUsername(username);
         if(userEntity == null){
             return null;
         } else {
-            return null;
+            return new PrincipalDetails(userEntity);
         }
     }
 }

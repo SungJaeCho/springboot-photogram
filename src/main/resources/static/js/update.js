@@ -6,12 +6,13 @@ function update(userId) {
 
     $.ajax({
         type:"put",
-        url:'/api/user/${userId}',
+        url:`/api/user/${userId}`,
         data:data,
         contentType:"application/x-www-form-urlencoded; charset=utf-8",
         dataType:"json"
     }).done(res=>{
         console.log("update성공");
+        location.href = `/user/${userId}`;
     }).fail(error=>{
         console.log("update실패");
     });

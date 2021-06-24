@@ -31,6 +31,7 @@ public class UserApiController {
             , @Valid UserUpdateDto userUpdateDto
             , BindingResult bindingResult //꼭 @Vaild가 적혀있는 다음 파라미터에 적어야함 !!!
             , @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
         if(bindingResult.hasErrors()){
             Map<String, String> errorMap = new HashMap<>();
             for(FieldError error : bindingResult.getFieldErrors()){

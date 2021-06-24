@@ -4,6 +4,8 @@ import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.util.Script;
 import com.cos.photogramstart.web.dto.CMRespDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +33,7 @@ public class ControllerExceptionHanlder {
 
     // 데이터 응답
     @ExceptionHandler(CustomValidationApiException.class)
-    public CMRespDto<?> validationApiException(CustomValidationApiException e){
-        return new CMRespDto<>(-1, e.getMessage(), e.getErrorMap());
+    public ResponseEntity<?> validationApiException(CustomValidationApiException e){
+        return new ResponseEntity<CMRespDto<?>>(new CMRespDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
     }
 }

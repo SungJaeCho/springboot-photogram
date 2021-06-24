@@ -1,5 +1,6 @@
 package com.cos.photogramstart.handler;
 
+import com.cos.photogramstart.handler.ex.CustomValidationApiException;
 import com.cos.photogramstart.handler.ex.CustomValidationException;
 import com.cos.photogramstart.util.Script;
 import com.cos.photogramstart.web.dto.CMRespDto;
@@ -18,6 +19,7 @@ public class ControllerExceptionHanlder {
 //        return new CMRespDto(-1, e.getMessage(), e.getErrorMap());
 //    }
 
+    //스크립트 응답
     @ExceptionHandler(CustomValidationException.class)
     public String validationException(CustomValidationException e){
         // CMRespDto, Script비교
@@ -25,5 +27,11 @@ public class ControllerExceptionHanlder {
         // 2. Ajax통신 - CMRespDto 개발자응답
         // 3. Android통신 - CMRespDto 개발자응답
         return Script.back(e.getErrorMap().toString());
+    }
+
+    // 데이터 응답
+    @ExceptionHandler(CustomValidationApiException.class)
+    public CMRespDto<?> validationApiException(CustomValidationApiException e){
+        return new CMRespDto<>(-1, e.getMessage(), e.getErrorMap());
     }
 }

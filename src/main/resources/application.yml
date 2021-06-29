@@ -37,4 +37,4 @@ spring:
       password: 1234   
 
 file:
-  path: /Users/sungjaecho/IdeaProjects/EaszUp-Springboot-Photogram-Start/upload
+  path: /Users/sungjaecho/Public/springbootwork/upload/

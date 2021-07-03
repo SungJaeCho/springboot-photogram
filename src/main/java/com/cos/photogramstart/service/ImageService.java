@@ -36,8 +36,9 @@ public class ImageService {
         }
         //image 테이블에 저장
         Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
-        Image imageEntity = imageRepository.save(image);
+//        Image imageEntity = imageRepository.save(image); imageEntity를 받을필요 없음.
+        imageRepository.save(image);
 
-//        System.out.println(imageEntity); 주석풀면 에러남
+//        System.out.println(imageEntity); //주석풀면 에러남 Image entity의 user항목이 image와 서로 무한참조가 일어났기때문에
     }
 }

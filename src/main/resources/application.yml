@@ -37,4 +37,5 @@ spring:
       password: 1234   
 
 file:
-  path: /Users/sungjaecho/Public/springbootwork/upload/
+#  path: C:\Users\Cho Family\IdeaProjects\springboot-photogram-upload/Users/sungjaecho/Public/springbootwork/upload/
+  path: C:/Users/Cho Family/IdeaProjects/springboot-photogram-upload/

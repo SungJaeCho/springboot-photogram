@@ -31,9 +31,9 @@ public class UserController {
 //        System.out.println("세션정보 :"+principalDetails.getUser());
 
         //2. 직접 찾은 세션 정보 @AuthenticationPrincipal 사용안할 경우 사용 X
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        PrincipalDetails mPrincipalDetails = (PrincipalDetails) auth.getPrincipal();
-        System.out.println("직접찾은세션정보 :" + mPrincipalDetails.getUser());
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        PrincipalDetails mPrincipalDetails = (PrincipalDetails) auth.getPrincipal();
+//        System.out.println("직접찾은세션정보 :" + mPrincipalDetails.getUser());
 
 //        model.addAttribute("principal", mPrincipalDetails.getUser());
 

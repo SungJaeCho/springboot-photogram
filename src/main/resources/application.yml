@@ -19,7 +19,7 @@ spring:
     password: cos1234
     
   jpa:
-    open-in-view: true
+    open-in-view: true #view단까지 세션을 오픈한다는 의미 false일경우 service가 종료되면 db세션이 종료되어 lazy로딩은 사용할 수 없다.
     hibernate:
       ddl-auto: update #create, update, none
       naming:
@@ -37,5 +37,5 @@ spring:
       password: 1234   
 
 file:
-#  path: C:\Users\Cho Family\IdeaProjects\springboot-photogram-upload/Users/sungjaecho/Public/springbootwork/upload/
-  path: C:/Users/Cho Family/IdeaProjects/springboot-photogram-upload/
+  path: /Users/sungjaecho/Public/springbootwork/upload/
+#  path: C:/Users/Cho Family/IdeaProjects/springboot-photogram-upload/

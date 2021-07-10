@@ -46,15 +46,35 @@ function subscribeInfoModalOpen(pageUserId) {
 		dataType:"json"
 	}).done(res=>{
 		console.log(res.data);
+		res.data.forEach(u=>{
+			let item = getSubscribeModalItem(u);
+			$("#subscribeModalList").append(item);
+		})
 	}).fail(error=>{
 		console.log("구독정보불러오기오류",error);
 	});
 }
 
-function getSubscribeModalItem() {
-	let item = ``; // backtic
+function getSubscribeModalItem(u) {
+	let item = `<div class="subscribe__item" id="subscribeModalItem-${u.id}">
+\t<div class="subscribe__img">
+\t\t<img src="/upload/${u.profileImageUrl}" onerror="this.src='/images/person.jpeg'"/>
+\t</div>
+\t<div class="subscribe__text">
+\t\t<h2>${u.username}</h2>
+\t</div>
+\t<div class="subscribe__btn">`; // backtic
+	if(!u.equalUserState){ //동일 유저가 아닐 때 버튼이 만들어져야함.
+		if(u.subscribeState){ // 구독한 상태
+			item += `\t\t<button class="cta blue" onclick="toggleSubscribeModal(this)">구독취소</button>`;
+		} else { //구독안한상태
+			item += `\t\t<button class="cta" onclick="toggleSubscribeModal(this)">구독하</button>`;
+		}
+	}
+	item += `
+\t</div>
+</div>`;
 	return item;
-
 }
 
 

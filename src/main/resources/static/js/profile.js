@@ -38,11 +38,22 @@ function toggleSubscribe(toUserId, obj) {
 }
 
 // (2) 구독자 정보  모달 보기
-function subscribeInfoModalOpen() {
+function subscribeInfoModalOpen(pageUserId) {
 	$(".modal-subscribe").css("display", "flex");
+
+	$.ajax({
+		url:`/api/user/${pageUserId}/subscribe`,
+		dataType:"json"
+	}).done(res=>{
+		console.log(res.data);
+	}).fail(error=>{
+		console.log("구독정보불러오기오류",error);
+	});
 }
 
 function getSubscribeModalItem() {
+	let item = ``; // backtic
+	return item;
 
 }
 

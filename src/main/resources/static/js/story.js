@@ -8,9 +8,10 @@
  */
 
 // (1) 스토리 로드하기
+let page = 0;
 function storyLoad() {
     $.ajax({
-        url: `/api/image`,
+        url: `/api/image?page=${page}`,
         dataType: "json"
     }).done(res => {
         console.log(res);
@@ -79,7 +80,17 @@ function getStoryItem(image) {
 
 // (2) 스토리 스크롤 페이징하기
 $(window).scroll(() => {
+    // console.log("윈도우스크롤탑",$(window).scrollTop());
+    // console.log("문서높이",$(document).height());
+    // console.log("윈도우높이",$(window).height());
+    // 윈도우스크롤탑은 = 문서높이 - 윈도우높이 즉 윈도우 스크롤탑이 문서높이-윈도우높이를 뺸값이랑 같을 떄 스크롤 페잊징이 발생하면됨.
+    let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
+    console.log(checkNum);
 
+    if(checkNum < 1 && checkNum > -1) {
+        page++;
+        storyLoad();
+    }
 });
 
 

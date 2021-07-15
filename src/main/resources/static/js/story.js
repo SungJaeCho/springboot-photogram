@@ -44,7 +44,7 @@ function getStoryItem(image) {
 \t<div class="sl__item__contents__icon">
 
 \t\t<button>
-\t\t\t<i class="fas fa-heart active" id="storyLikeIcon-1" onclick="toggleLike()"></i>
+\t\t\t<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>
 \t\t</button>
 \t</div>
 
@@ -85,7 +85,7 @@ $(window).scroll(() => {
     // console.log("윈도우높이",$(window).height());
     // 윈도우스크롤탑은 = 문서높이 - 윈도우높이 즉 윈도우 스크롤탑이 문서높이-윈도우높이를 뺸값이랑 같을 떄 스크롤 페잊징이 발생하면됨.
     let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
-    console.log(checkNum);
+    // console.log(checkNum);
 
     if(checkNum < 1 && checkNum > -1) {
         page++;
@@ -95,8 +95,8 @@ $(window).scroll(() => {
 
 
 // (3) 좋아요, 안좋아요
-function toggleLike() {
-    let likeIcon = $("#storyLikeIcon-1");
+function toggleLike(imageId) {
+    let likeIcon = $(`#storyLikeIcon-${imageId}`);
     if (likeIcon.hasClass("far")) {
         likeIcon.addClass("fas");
         likeIcon.addClass("active");

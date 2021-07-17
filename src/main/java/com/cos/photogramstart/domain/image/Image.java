@@ -32,12 +32,16 @@ public class Image {
     private User user;
 
     // 이미지 좋아요. 개발예정
+    @JsonIgnoreProperties({"image"})
     @OneToMany(mappedBy = "image")
     private List<Likes> likes;
 
     // 이미지 댓글. 개발예정
 
     private LocalDateTime createDate;
+
+    @Transient // DB에 컬럼이 만들어지지 않는다.
+    private boolean likeState;
 
     @PrePersist // DB Insert되기 직전에 실행됨
     public void createDate() {

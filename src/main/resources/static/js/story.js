@@ -25,7 +25,7 @@ function getStoryItem(image) {
 \t\t</button>
 \t</div>
 
-\t<span class="like"><b id="storyLikeCount-1">3 </b>likes</span>
+\t<span class="like"><b id="storyLikeCount-${image.id}">${image.likeCount} </b>likes</span>
 
 \t<div class="sl__item__contents__content">
 \t\t<p>${image.caption}</p>

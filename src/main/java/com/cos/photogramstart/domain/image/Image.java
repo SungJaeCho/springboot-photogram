@@ -43,6 +43,9 @@ public class Image {
     @Transient // DB에 컬럼이 만들어지지 않는다.
     private boolean likeState;
 
+    @Transient // DB에 컬럼이 만들어지지 않는다.
+    private int likeCount;
+
     @PrePersist // DB Insert되기 직전에 실행됨
     public void createDate() {
         this.createDate = LocalDateTime.now();

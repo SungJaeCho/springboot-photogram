@@ -2,6 +2,7 @@ package com.cos.photogramstart.domain.likes;
 
 import com.cos.photogramstart.domain.image.Image;
 import com.cos.photogramstart.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,6 +33,7 @@ public class Likes { //like로는 테이블 생성 불가
     @ManyToOne
     private Image image; // 1
 
+    @JsonIgnoreProperties({"images"}) // USER테이블안에 images라는 변수는 무시한다. (무한참조 방지)
     @JoinColumn(name="userId")
     @ManyToOne
     private User user;

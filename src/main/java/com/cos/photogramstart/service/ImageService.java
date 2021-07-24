@@ -23,6 +23,9 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
 
+    @Value("${file.path}")
+    private String uploadFolder;
+
     @Transactional(readOnly = true)
     public List<Image> 인기사진(){
         return imageRepository.mPopular();
@@ -43,9 +46,6 @@ public class ImageService {
         });
         return images;
     }
-
-    @Value("${file.path}")
-    private String uploadFolder;
 
     @Transactional
     public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {

@@ -158,9 +158,9 @@ function addComment(imageId) {
         contentType:"application/json; charset=utf-8",
         dataType:"json"
     }).done(res=>{
-        console.log("성공",res);
+        console.log("성공", res);
     }).fail(error=>{
-        console.log("오류",error);
+        console.log("오류", error);
     });
 
     let content = `

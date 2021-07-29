@@ -1,57 +1,60 @@
 function getStoryItem(image) {
     let item = `<div class="story-list__item">
-<div class="sl__item__header">
-\t<div>
-\t\t<img class="profile-image" src="/upload/${image.user.profileImageUrl}"
-\t\t\tonerror="this.src='/images/person.jpeg'" />
-\t</div>
-\t<div>${image.user.username}</div>
-</div>
+                <div class="sl__item__header">
+                \t<div>
+                \t\t<img class="profile-image" src="/upload/${image.user.profileImageUrl}"
+                \t\t\tonerror="this.src='/images/person.jpeg'" />
+                \t</div>
+                \t<div>${image.user.username}</div>
+                </div>
+                
+                <div class="sl__item__img">
+                \t<img src="/upload/${image.postImageUrl}" />
+                </div>
+                
+                <div class="sl__item__contents">
+                \t<div class="sl__item__contents__icon">
+                
+                \t\t<button>`;
+                    if(image.likeState){
+                        item += `\t\t\t<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
+                    } else {
+                        item += `\t\t\t<i class="fa-heart far" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
+                    }
+                    item += `
+                \t\t</button>
+                \t</div>
+                
+                \t<span class="like"><b id="storyLikeCount-${image.id}">${image.likeCount}</b>likes</span>
+                
+                \t<div class="sl__item__contents__content">
+                \t\t<p>${image.caption}</p>
+                \t</div>
+                
+                \t<div id="storyCommentList-${image.id}">`;
 
-<div class="sl__item__img">
-\t<img src="/upload/${image.postImageUrl}" />
-</div>
+                image.comments.forEach(comment=>{
+                    item += `
+                    <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
+                        <p>
+                            <b>${comment.user.username} :</b> ${comment.content}
+                        </p>
+                        <button>
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    `;
+                });
 
-<div class="sl__item__contents">
-\t<div class="sl__item__contents__icon">
-
-\t\t<button>`;
-    if(image.likeState){
-        item += `\t\t\t<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
-    } else {
-        item += `\t\t\t<i class="fa-heart far" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
-    }
-    item += `
-\t\t</button>
-\t</div>
-
-\t<span class="like"><b id="storyLikeCount-${image.id}">${image.likeCount}</b>likes</span>
-
-\t<div class="sl__item__contents__content">
-\t\t<p>${image.caption}</p>
-\t</div>
-
-\t<div id="storyCommentList-${image.id}">
-
-\t\t<div class="sl__item__contents__comment" id="storyCommentItem-1"">
-\t\t\t<p>
-\t\t\t\t<b>Lovely :</b> 부럽습니다.
-\t\t\t</p>
-
-\t\t\t<button>
-\t\t\t\t<i class="fas fa-times"></i>
-\t\t\t</button>
-
-\t\t</div>
-
-\t</div>
-
-\t<div class="sl__item__input">
-\t\t<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${image.id}" />
-\t\t<button type="button" onClick="addComment(${image.id})">게시</button>
-\t</div>
-
-</div>`;
+                item +=`
+                \t</div>
+                
+                \t<div class="sl__item__input">
+                \t\t<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${image.id}" />
+                \t\t<button type="button" onClick="addComment(${image.id})">게시</button>
+                \t</div>
+                
+                </div>`;
     return item;
 }
 /**
@@ -159,20 +162,20 @@ function addComment(imageId) {
         dataType:"json"
     }).done(res=>{
         console.log("성공", res);
-    }).fail(error=>{
-        console.log("오류", error);
-    });
-
-    let content = `
-			  <div class="sl__item__contents__comment" id="storyCommentItem-2""> 
+        let comment = res.data;
+        let content = `
+			  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}"> 
 			    <p>
-			      <b>GilDong :</b>
-			      댓글 샘플입니다.
+			      <b>${comment.user.username} :</b>
+			      ${comment.content}
 			    </p>
 			    <button><i class="fas fa-times"></i></button>
 			  </div>
-	`;
-    commentList.prepend(content); //최신댓글이 위로 prepend
+	    `;
+        commentList.prepend(content); //최신댓글이 위로 prepend
+    }).fail(error=>{
+        console.log("오류", error);
+    });
     commentInput.val("");
 }
 

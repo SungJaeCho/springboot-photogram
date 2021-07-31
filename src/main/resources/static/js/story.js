@@ -162,6 +162,7 @@ function addComment(imageId) {
         alert("댓글을 작성해주세요!");
         return;
     }
+
     $.ajax({
         type:"post",
         url:"/api/comment",
@@ -182,7 +183,8 @@ function addComment(imageId) {
 	    `;
         commentList.prepend(content); //최신댓글이 위로 prepend
     }).fail(error=>{
-        console.log("오류", error);
+        console.log("오류", error.responseJSON.data.content);
+        alert(error.responseJSON.data.content);
     });
     commentInput.val("");
 }

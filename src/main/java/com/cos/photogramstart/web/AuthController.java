@@ -53,7 +53,7 @@ public class AuthController {
             // User <- SignupDto
             User user = signupDto.toEntity();
             User userEntity = authService.회원가입(user);
-            System.out.println(userEntity);
+//            System.out.println(userEntity);
             return "auth/signin";
         }
     }

@@ -41,7 +41,7 @@
                         
                         <!-- Oauth 소셜로그인 -->
                         <div class="login__facebook">
-                            <button>
+                            <button onclick="javascript:location.href='/oauth2/authorization/facebook'"> <!-- spring oauth의 정해진 주소임 물론 yml에 registration 설정이 되어있어야함 -->
                                 <i class="fab fa-facebook-square"></i>
                                 <span>Facebook으로 로그인</span>
                             </button>

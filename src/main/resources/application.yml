@@ -36,15 +36,15 @@ spring:
       name: test
       password: 1234
 
-  oauth2:
-    client:
-      registration:
-        facebook:
-          client-id: 269113997883991
-          client-secret: 8e50193deba907d68265094e747f64c2
-          scope:
-          - public_profile
-          - email
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 269113997883991
+            client-secret: 8e50193deba907d68265094e747f64c2
+            scope:
+            - public_profile
+            - email
 
 
 
